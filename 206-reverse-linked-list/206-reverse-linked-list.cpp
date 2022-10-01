@@ -8,26 +8,46 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+//recursive 
+// Tc and SC is O(n)
 class Solution {
 public:
+    void reverse(ListNode* &head,ListNode* &curr,ListNode* &prev){
+    if(curr==NULL){
+        head=prev;
+        return;
+    }
+    ListNode* forward=curr->next;
+    reverse(head,forward,curr);
+    curr->next=prev;
+    
+}
     ListNode* reverseList(ListNode* head) {
-        ListNode* l=head;
-        ListNode* temp=new ListNode();
-        temp->next=NULL;
-        
-        while(head){
-            // temp=temp*10+head->val;
-            temp->val=l->val;
-            if(l->next==NULL){
-                break;
-            }
-            ListNode* t=new ListNode();
-                t->next=temp;
-            temp=t;
-        l=l->next;
-        }
-        if(head)
-        return temp;
-        else return head;
+        ListNode* curr=head;
+    ListNode* prev=NULL;
+    reverse(head,curr,prev);
+    return head;
     }
 };
+//iterative
+// Node *reverseLinkedList(Node *head) 
+// {
+//     if(head==NULL||head->next==NULL){
+//         return head;
+//     }
+//     if(curr==NULL){
+//         return prev;
+//     }
+//     Node* curr=head;
+//     Node* prev=NULL;
+//     Node* forward=NULL;
+//     while(curr!=NULL){
+//         forward=curr->next;
+//         curr->next=prev;
+//         prev=curr;
+//         curr=forward;
+//     }
+//     return prev;
+//     // Write your code here
+// }
+
