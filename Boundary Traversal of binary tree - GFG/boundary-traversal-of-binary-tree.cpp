@@ -119,12 +119,13 @@ private:
         if(root==NULL){
             return;
         }
+        
+        traverseLeaf(root->left,ans);
         if(root->left==NULL && root->right==NULL)
         {
             ans.push_back(root->data);
             return;
         }
-        traverseLeaf(root->left,ans);
         traverseLeaf(root->right,ans);
     }
     
