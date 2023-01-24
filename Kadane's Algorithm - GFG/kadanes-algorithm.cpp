@@ -14,19 +14,19 @@ class Solution{
         long long maxSum=INT_MIN;
         long long currSum=0;
         
-        // long long maxSum = INT_MIN, max_ending_here = 0;
- 
-    for (int i = 0; i < n; i++) {
-        currSum = currSum + arr[i];
-        if (maxSum < currSum)
-            maxSum = currSum;
- 
-        if (currSum < 0)
-            currSum = 0;
-    }
-    return maxSum;
+        for(int i=0;i<n;i++){
+            currSum+=arr[i];
+            if(currSum>maxSum)
+            maxSum=currSum;
+            if(currSum<0)
+            currSum=0;
+        }
+        return maxSum;
     }
 };
+
+
+    
 
 //{ Driver Code Starts.
 
