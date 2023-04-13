@@ -42,7 +42,8 @@ class Solution{
 	}
     int minSwaps(vector<int>&A, int n){
         vector<int> inOrd;
-        inorder(A,n,0,inOrd);
+        int index=0;
+        inorder(A,n,index,inOrd);
         
         return minS(inOrd);
     }
