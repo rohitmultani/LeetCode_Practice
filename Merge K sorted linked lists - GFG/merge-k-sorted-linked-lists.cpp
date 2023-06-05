@@ -43,51 +43,47 @@ struct Node
 };
 */ 
 
+class compare{
+    public:
+    bool operator()(Node* a,Node* b){
+        return a->data > b->data;
+    }
+};
 class Solution{
   public:
-  Node* merge(Node* left,Node* right){
-        if(left==NULL)
-            return right;
-        if(right==NULL)
-            return left;
-        Node* ans = new Node(-1);
-        Node* temp=ans;
-        while(left!=NULL && right!=NULL){
-            int l = left->data;
-            int r = right->data;
-            if(l<=r){
-                temp->next=left;
-                temp=temp->next;
-                left=left->next;
-            }
-            else{
-                temp->next=right;
-                temp=temp->next;
-                right=right->next;
-            }
-        }
-              if(left!=NULL){
-             temp->next=left; 
-            }
-             else if(right!=NULL){
-             temp->next=right; 
-            }
-        return ans->next;
-    }
     //Function to merge K sorted linked list.
-    void merge2List(Node* arr[],int K,int i){
-        if(i>K-2)
-        return;
-        
-        arr[i+1]=merge(arr[i],arr[i+1]);
-         merge2List(arr,K,++i);
-         
-    
-    }
-    Node * mergeKLists(Node *arr[], int K)
+    Node * mergeKLists(Node *listArray[], int k)
     {
-      merge2List(arr,K,0);
-           return arr[K-1];
+     priority_queue<Node*,vector<Node*>,compare> minHeap;
+    
+    
+    for(int i=0;i<k;i++){
+        if(listArray[i]!=NULL){
+            minHeap.push(listArray[i]);
+        }
+    }
+    Node* head=NULL;
+    Node* tail=NULL;
+    
+    while(minHeap.size()>0){
+        Node* top=minHeap.top();
+        minHeap.pop();
+           
+        if(top->next!=NULL){
+            minHeap.push(top->next);
+        }
+        if(head==NULL){
+            head=top;
+            tail=top;
+            
+        }
+        else{
+            tail->next=top;
+            tail=top;
+            
+        }
+    }
+    return head;
     }
 };
 
