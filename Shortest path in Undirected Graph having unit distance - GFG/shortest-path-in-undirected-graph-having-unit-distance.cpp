@@ -20,19 +20,20 @@ class Solution {
         for(int i=0;i<N;i++)
         dist[i]=1e9;
         
-        queue<int> q;
+        queue<pair<int,int>> q;
         dist[src]=0;
-        q.push(src);
+        q.push({src,0});
         
         while(!q.empty()){
-            int node = q.front();
+            int node = q.front().first;
+            int d = q.front().second;
             q.pop();
             
             for(auto it:adj[node]){
                 
-                if(dist[it]>dist[node]+1){
-                    dist[it]=dist[node]+1;
-                    q.push(it);
+                if(dist[it]>d+1){
+                    dist[it]=d+1;
+                    q.push({it,d+1});
                 }
                 
             }
