@@ -9,8 +9,9 @@ using namespace std;
 
 
 class DisjointSet {
-    vector<int> rank, parent, size;
+    
 public:
+vector<int> rank, parent, size;
     DisjointSet(int n) {
         rank.resize(n + 1, 0);
         parent.resize(n + 1);
@@ -78,10 +79,14 @@ class Solution {
         }
         
         int cnt=0;
-        for(auto it:stoneNodes){
-            if(Ds.findUPar(it.first)==it.first){
-                cnt++;
-            }
+        // for(auto it:stoneNodes){
+        //     if(Ds.findUPar(it.first)==it.first){
+        //         cnt++;
+        //     }
+        // }
+        for(int i=0;i<(maxRow+maxCol+1);i++){
+            if(Ds.parent[i]==i && Ds.size[i]>1)
+                cnt+=1;
         }
         return n-cnt;
     }
