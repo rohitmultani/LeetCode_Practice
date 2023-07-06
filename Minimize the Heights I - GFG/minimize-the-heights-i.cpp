@@ -15,8 +15,7 @@ public:
         int mini=arr[0];
         int maxi=arr[n-1];
         
-        for(int i=0;i<n;i++){
-            
+        for(int i=1;i<n;i++){
             mini=min(arr[0]+k,arr[i]-k);
             maxi=max(arr[n-1]-k,arr[i-1]+k);
             ans=min(ans,maxi-mini);
