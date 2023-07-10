@@ -35,12 +35,8 @@ class Solution{
         long long water=0;
         
         for(int i=0;i<n;i++){
-            if(next[i]==-1 || prev[i]==-1){
-                continue;
-            }
-            else{
+            
                 water=water+min(prev[i],next[i]) - arr[i];
-            }
         }
         return water;
     }
