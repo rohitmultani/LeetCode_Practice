@@ -8,12 +8,16 @@ using namespace std;
 class Solution
 {
   public:
-    vector<int> findOrder(int V, int m, vector<vector<int>> prerequisites) 
+    vector<int> findOrder(int V, int m, vector<vector<int>> pre) 
     {
        vector<int> adj[V];
-		for (auto it : prerequisites) {
-			adj[it[1]].push_back(it[0]);
-		}
+// 		for (auto it : prerequisites) {
+// 			adj[it[1]].push_back(it[0]);
+// 		}
+	    
+	    for(int i=0;i<pre.size();i++){
+	        adj[pre[i][1]].push_back(pre[i][0]);
+	    }
 	    
 	    int indegree[V]={0};
 	    for(int i=0;i<V;i++){
@@ -46,6 +50,7 @@ class Solution
 		return {};
     }
 };
+
 
 //{ Driver Code Starts.
 
