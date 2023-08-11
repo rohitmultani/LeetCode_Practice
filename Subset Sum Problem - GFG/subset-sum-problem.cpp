@@ -9,30 +9,30 @@ using namespace std;
 
 class Solution{   
 public:
-    bool isSubsetSum(vector<int>arr, int k){
-    int n = arr.size();
-    vector<bool> prev(k+1,false);
-    vector<bool> curr(k+1,false);
-    
-    prev[0]=true;
-    curr[0]=true;
-
-    prev[arr[0]]=true;
-    
-    for(int ind=1;ind<n;ind++){
-        for(int target=1;target<=k;target++){
-            bool notTake = prev[target];
-            bool take = false;
-
-            if(arr[ind]<=target)
-            take = prev[target-arr[ind]];
-
-            curr[target]=take|notTake;
-        }
-        prev=curr;
+    bool f(int i, vector<int> arr, int sum,vector<vector<int>> &dp){
+        
+        if(sum==0)
+        return true;
+        
+        if(i==0)
+        return sum == arr[i];
+        
+        if(dp[i][sum]!=-1)
+        return dp[i][sum];
+        
+        bool take = false;
+        if(arr[i]<=sum)
+        take = f(i-1,arr,sum-arr[i],dp);
+        
+        bool nottake = f(i-1,arr,sum,dp);
+        
+        return  dp[i][sum]=take | nottake;
+        
     }
-    
-    return prev[k];
+    bool isSubsetSum(vector<int>arr, int sum){
+        int n = arr.size();
+        vector<vector<int>> dp(n,vector<int> (sum+1,-1));
+        return f(n-1,arr,sum,dp);
     }
 };
 
