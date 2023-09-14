@@ -35,31 +35,33 @@ class Solution{
 	int perfectSum(int arr[], int n, int sum)
 	{
 	    vector<vector<int>> dp(n,vector<int> (sum+1,0));
-	    
+	    vector<int> prev(sum+1,0);
+	    vector<int> curr(sum+1,0);
 	    
 	    for(int i=0;i<n;i++){
 	        for(int j = 0;j<=sum;j++){
 	            if(i==0){
 	                if(j==0 && arr[0]==0)
-	                 dp[i][j]=2;
+	                 curr[j]=2;
 	                else if(j==0 || j==arr[0])
-	                dp[i][j]=1;
+	                curr[j]=1;
 	            }
 	            else{
 	                
 	            
-	            int notake = dp[i-1][j];
+	            int notake = prev[j];
 	    
 	            int take = 0;
 	    
         	    if(arr[i]<=j)
-        	    take=dp[i-1][j-arr[i]];
+        	    take=prev[j-arr[i]];
 	    
-	             dp[i][j]=(take+notake)%M;
+	             curr[j]=(take+notake)%M;
 	            }
 	        }
+	        prev=curr;
 	    }
-        return dp[n-1][sum];
+        return prev[sum];
 	}
 	  
 };
