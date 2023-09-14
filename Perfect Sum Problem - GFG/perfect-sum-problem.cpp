@@ -61,7 +61,7 @@ class Solution{
 	        }
 	        prev=curr;
 	    }
-        return prev[sum];
+        return curr[sum];
 	}
 	  
 };
